@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Handler Mapping -->
+    <bean id="handlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+    <!-- Bean - Mapping -->
+    <bean name="/test.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="do"/>
+    </bean>
+    <bean name="/list.do" class="com.dodo.controller.ListController">
+        <property name="dao" ref="dao"/>
+    </bean>
+
+
+    <!-- View Resolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+</beans>
