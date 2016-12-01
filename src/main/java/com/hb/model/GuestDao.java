@@ -10,14 +10,14 @@ import java.util.List;
 
 public class GuestDao {
     private JdbcTemplate jdbcTemplate;
+    RowMapper<GuestVo> rowMapper;
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<GuestVo> selectAll() {
-        String sql = "SELECT * FROM GUEST ORDER BY SABUN";
-        RowMapper<GuestVo> rowMapper = new RowMapper<GuestVo>() {
+    public GuestDao() {
+        rowMapper = new RowMapper<GuestVo>() {
             @Override
             public GuestVo mapRow(ResultSet resultSet, int i) throws SQLException {
                 GuestVo bean = new GuestVo(
@@ -29,8 +29,11 @@ public class GuestDao {
                 return bean;
             }
         };
-        List list = jdbcTemplate.query(sql, rowMapper);
+    }
 
+    public List<GuestVo> selectAll() {
+        String sql = "SELECT * FROM GUEST ORDER BY SABUN";
+        List list = jdbcTemplate.query(sql, rowMapper);
         return list;
     }
 
@@ -50,5 +53,11 @@ public class GuestDao {
         String sql = "DELETE FROM GUEST WHERE SABUN = ?";
         Object[] obj = {sabun};
         return jdbcTemplate.update(sql, obj);
+    }
+
+    public GuestVo selectOne(int sabun) {
+        String sql = "SELECT * FROM GUEST WHERE SABUN = ?";
+        Object[] obj = {sabun};
+        return jdbcTemplate.queryForObject(sql, obj, rowMapper);
     }
 }
