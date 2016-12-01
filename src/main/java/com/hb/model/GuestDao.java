@@ -33,4 +33,22 @@ public class GuestDao {
 
         return list;
     }
+
+    public int insertOne(GuestVo bean) {
+        String sql = "INSERT INTO GUEST VALUES (?, ?, sysdate, ?)";
+        Object[] obj = {bean.getSabun(), bean.getName(), bean.getPay()};
+        return jdbcTemplate.update(sql, obj);
+    }
+
+    public int updateOne(GuestVo bean) {
+        String sql = "UPDATE GUEST SET NAME = ?, PAY = ? WHERE SABUN = ?";
+        Object[] obj = {bean.getName(), bean.getPay(), bean.getSabun()};
+        return jdbcTemplate.update(sql, obj);
+    }
+
+    public int deleteOne(int sabun) {
+        String sql = "DELETE FROM GUEST WHERE SABUN = ?";
+        Object[] obj = {sabun};
+        return jdbcTemplate.update(sql, obj);
+    }
 }

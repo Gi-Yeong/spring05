@@ -12,11 +12,6 @@
     <title>LIST</title>
 </head>
 <body>
-<div>
-    <c:if test="${loginGo}">
-        <a href="../login.do">로그인</a>
-    </c:if>
-</div>
 <h1>LIST PAGE</h1>
 <table>
     <tr>
@@ -34,8 +29,6 @@
         </tr>
     </c:forEach>
 </table>
-<c:if test="${loginOk}">
-    <p><a href="add.do">입 력</a></p>
-</c:if>
+    <p><a href="add.hb">입 력</a></p>
 </body>
 </html>
